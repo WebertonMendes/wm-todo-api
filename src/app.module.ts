@@ -17,7 +17,7 @@ import { AuthModule } from './modules/auth/auth.module';
       },
       entities: [process.env.TYPEORM_ENTITIES],
       autoLoadEntities: true,
-      synchronize: false,
+      synchronize: true,
     }),
     AuthModule,
     TasksModule,
