@@ -12,7 +12,7 @@ import { AuthModule } from './modules/auth/auth.module';
       isGlobal: true,
     }),
     TypeOrmModule.forRoot({
-      type: 'postgres',
+      type: "postgres",
       host: process.env.TYPEORM_HOST,
       port: parseInt(process.env.TYPEORM_PORT),
       username: process.env.TYPEORM_USERNAME,
@@ -20,6 +20,9 @@ import { AuthModule } from './modules/auth/auth.module';
       database: process.env.TYPEORM_DATABASE,
       entities: [process.env.TYPEORM_ENTITIES],
       synchronize: false,
+      ssl: {
+        rejectUnauthorized: false,
+      },
     }),
     AuthModule,
     TasksModule,
