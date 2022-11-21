@@ -1,0 +1,20 @@
+FROM node:alpine
+
+RUN apk update && apk upgrade
+RUN npm install -g npm@9.1.1
+RUN npm install -g yarn --force
+
+USER node
+
+RUN mkdir -p /home/node/api
+
+WORKDIR /home/node/api
+
+COPY --chown=node:node ./backend .
+
+RUN yarn
+RUN yarn build
+
+EXPOSE 3333
+
+CMD ["sh", "-c", "yarn typeorm migration:run -d dist/database/config && yarn start:prod"]

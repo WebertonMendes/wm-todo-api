@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+  todo_list_db:
+    image: postgres
+    container_name: todo_list_db
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - 'POSTGRES_USER=${DB_USERNAME}'
+      - 'POSTGRES_PASSWORD=${DB_PASSWORD}'
+      - 'POSTGRES_DB=${DB_DATABASE}'
+    volumes:
+      - pgdata:/data/postgres
+
+  todo_list_api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: todo_list_api
+    restart: always
+    ports:
+      - 3333:3333
+    env_file:
+      - ./backend/.env
+    volumes:
+      - apiLogs:/usr/src/todo_list_api/logs:rw
+    links:
+      - todo_list_db
+    depends_on:
+      - todo_list_db
+
+volumes:
+  pgdata:
+  apiLogs:
