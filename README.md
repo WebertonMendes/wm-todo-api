@@ -27,6 +27,6 @@ docker-compose up -d
 ##
 ```
 
-**URLs disponíveis da aplicação em produção:**
+**URL da aplicação em produção:**<br/>
 Documentação API: "https://wm-todo-api.herokuapp.com/api/v1/docs" <br/>
 URL API: "https://wm-todo-api.herokuapp.com/api/v1" <br/>
